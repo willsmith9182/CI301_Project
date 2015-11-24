@@ -6,12 +6,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import database.DBConnect;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JPasswordField;
 import java.awt.Button;
 import java.awt.event.ActionListener;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class LoginView extends JFrame {
@@ -73,11 +78,17 @@ public class LoginView extends JFrame {
 		
 		Button button = new Button("Login");
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) 
+			public void actionPerformed(ActionEvent arg0)
 			{
-				String username =  T_username.getText();
-				String password =  T_password.getText();
-				LoginCheck.Login(username , password);
+				//very basic login 
+				//no hash implemented
+				try 
+				{
+					DBConnect.basicLogin(T_username.toString() , T_password.toString());
+				} catch (SQLException e) 
+				{
+					e.printStackTrace();
+				}
 			}
 		});
 		button.setBounds(327, 162, 70, 22);
