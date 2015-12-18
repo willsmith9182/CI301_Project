@@ -1,4 +1,4 @@
-package login;
+package ui.login;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -6,8 +6,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import database.DBConnect;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -24,6 +22,7 @@ public class LoginView extends JFrame {
 	private JPanel contentPane;
 	protected JTextField T_username;
 	protected JPasswordField T_password;
+	String charPassword;
 
 	/**
 	 * Launch the application.
@@ -67,10 +66,10 @@ public class LoginView extends JFrame {
 		contentPane.add(T_username);
 		T_username.setColumns(10);
 		
-		JLabel lblNfcBackEnd = new JLabel("NFC BACK END V.01");
-		lblNfcBackEnd.setFont(new Font("MS PMincho", Font.BOLD | Font.ITALIC, 18));
-		lblNfcBackEnd.setBounds(103, 11, 254, 26);
-		contentPane.add(lblNfcBackEnd);
+		JLabel L_logo = new JLabel("NFC BACK END V.01");
+		L_logo.setFont(new Font("MS PMincho", Font.BOLD | Font.ITALIC, 18));
+		L_logo.setBounds(103, 11, 254, 26);
+		contentPane.add(L_logo);
 		
 		T_password = new JPasswordField();
 		T_password.setBounds(103, 160, 128, 20);
@@ -78,17 +77,20 @@ public class LoginView extends JFrame {
 		
 		Button button = new Button("Login");
 		button.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0)
 			{
 				//very basic login 
 				//no hash implemented
-				try 
+				charPassword = String.copyValueOf(T_password.getPassword());
+/*				try 
 				{
-					DBConnect.basicLogin(T_username.toString() , T_password.toString());
+					System.out.println("char array to password : " + charPassword);
+					//DBConnect.basicLogin(T_username.getText() ,  charPassword);
 				} catch (SQLException e) 
 				{
 					e.printStackTrace();
-				}
+				}*/
 			}
 		});
 		button.setBounds(327, 162, 70, 22);

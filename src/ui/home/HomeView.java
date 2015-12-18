@@ -1,4 +1,4 @@
-package home;
+package ui.home;
 
 import javax.swing.JFrame;
 import java.awt.Color;
@@ -67,9 +67,9 @@ public class HomeView extends JFrame
 		btnUserLookup.setBounds(10, 210, 89, 23);
 		getContentPane().add(btnUserLookup);
 		
-		JTextArea txtrDisplay = new JTextArea();
-		txtrDisplay.setText("Display 0:");
-		txtrDisplay.setBounds(109, 11, 498, 735);
-		getContentPane().add(txtrDisplay);
+		JTextArea T_bigText = new JTextArea();
+		T_bigText.setText("Welcome to V0.1 NFC/Android door automation");
+		T_bigText.setBounds(109, 11, 498, 735);
+		getContentPane().add(T_bigText);
 	}
 }
