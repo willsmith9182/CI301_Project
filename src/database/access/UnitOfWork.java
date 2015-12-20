@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
 
 public class UnitOfWork implements IUnitOfWork {
@@ -29,6 +28,8 @@ public class UnitOfWork implements IUnitOfWork {
 			PreparedStatement statement = _conn.prepareStatement(sql);
 			
 			rs = statement.executeQuery();
+			
+			
 			return rs;
 		}
 		catch(SQLException ex){

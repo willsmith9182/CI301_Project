@@ -3,13 +3,11 @@ package database.repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.function.Function;
 
 import database.access.DBFactory;
 import database.access.IUnitOfWork;
 import database.types.User;
-
-
-
 
 public class NFCRepository implements INFCRepository{
 
@@ -19,17 +17,19 @@ public class NFCRepository implements INFCRepository{
 		_dbFactory = new DBFactory(connectionString, username, password);
 	}	
 
+	
+	//Function <Person, String> f
+	
+	
+	
 	@Override
-	public ArrayList<User> GetAllUsers() throws Exception {
+	public ArrayList<User> GetAllUsers(Function<ResultSet, ArrayList<User>> mapping) throws Exception {
 		//try and get a result set of all the users
 		IUnitOfWork uow = null;
 		try
 		{
-			uow = _dbFactory.CreateUnitOfWork();
-			
-			ResultSet rs =   uow.RunStatement("SELECT * FROM USERS");
-		
-			return mapUsers(rs);
+			uow = _dbFactory.CreateUnitOfWork();				
+			return mapping.apply(uow.RunStatement("SELECT * FROM USERS"));
 			
 		}
 		catch(ClassNotFoundException ex){
@@ -40,41 +40,23 @@ public class NFCRepository implements INFCRepository{
 		}
 	}
 
-	@Override
-	public User GetMatchingUser(String username) throws Exception {
+	
+	public User GetMatchingUser(String username, Function<ResultSet, ArrayList<User>> mapping) throws Exception {
 		//try and get a result set of all the users
 		try
 		{
 			IUnitOfWork uow = _dbFactory.CreateUnitOfWork();
 			// please don't pwn my system, have you heard of bobby tables?
-			// https://xkcd.com/327/			
-			ResultSet rs =  uow.RunStatement("SELECT * FROM USERS where _username = '"+username+"'");
+			// https://xkcd.com/327/	
+			ArrayList<User> users = mapping.apply(uow.RunStatement("SELECT * FROM USERS where _username = '"+username+"'"));
 			
-			ArrayList<User> users = mapUsers(rs);
+		
 			
 			if (users.isEmpty()) throw new Exception("User '"+username+"' not found");
-			return users.get(0);
+			return users.get(0);                             
 		}
 		catch(ClassNotFoundException ex){
 			throw new Exception("Unable to query database", ex);
 		}
-			
-		}
-
-		private ArrayList<User> mapUsers(ResultSet rs) throws SQLException {
-			ArrayList<User> results = new ArrayList<User>();
-			
-			while(rs.next()){
-				results.add(mapSingleUser(rs));
-			}
-			
-			return results;
-		}
-		
-		private User mapSingleUser(ResultSet rs) throws SQLException{
-			Integer id =rs.getInt("_userID");
-			String un =rs.getString("_username");
-			String pw =rs.getString("_password");
-			return new User(id,un,pw);
-		}
-	}	
+	}
+			}	

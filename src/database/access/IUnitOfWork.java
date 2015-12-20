@@ -2,7 +2,6 @@ package database.access;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
 public interface IUnitOfWork {
 	public ResultSet RunStatement(String sql) throws SQLException;	

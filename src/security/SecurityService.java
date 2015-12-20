@@ -21,7 +21,7 @@ public class SecurityService
 	public Boolean UserIsAuthenticated(String username, String password) throws Exception 
 	{
 		try{
-			User user = _repo.GetMatchingUser(username);
+			User user = _repo.GetMatchingUser(username,null);
 			
 			return  _hash.Challenge(user.getPassword(), "", password);
 		}

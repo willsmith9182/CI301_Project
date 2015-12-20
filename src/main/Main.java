@@ -1,6 +1,9 @@
 package main;
 
+import java.util.function.Function;
+
 import database.repository.NFCRepository;
+import database.types.User;
 import security.SecurityService;
 
 public class Main 
@@ -20,14 +23,28 @@ public class Main
 		*/
 		
 		
-			SecurityService ss = new SecurityService(nfcRepo);
+			/*SecurityService ss = new SecurityService(nfcRepo);
 			
-			Boolean isEltReal= ss.UserIsAuthenticated("Elliott", "neerG");
+			Boolean isEltReal= ss.UserIsAuthenticated("Elliott", "neerG");*/
 			
-			System.out.println("Is elt real?? " + isEltReal);
+		
+		/*User thing = new User(1,"twat", "fuck off eclipse");
+		User otherThing = new User(2, "two", "twat");
+		
+		boolean test = Test(thing,otherThing, i -> i.getUsername());*/
+			
+		System.out.println("Is elt real?? " + test);
 	
 		System.in.read();
 		
 	}
 
+	public static boolean Test(User user1, User user2, Function<User, String> test1, Function<User, String> test2){
+		
+		String value1 = test1.apply(user1);
+		String value2 = test2.apply(user2);
+		
+		return value1 == value2;
+		
+	}
 }

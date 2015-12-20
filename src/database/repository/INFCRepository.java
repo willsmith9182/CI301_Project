@@ -1,12 +1,12 @@
 package database.repository;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.function.Function;
 
 import database.types.User;
 
 public interface INFCRepository {
-	ArrayList<User> GetAllUsers() throws Exception;
-	User GetMatchingUser(String username) throws Exception;
+	ArrayList<User> GetAllUsers(Function<ResultSet, ArrayList<User>> mapping) throws Exception;
+	User GetMatchingUser(String username,Function<ResultSet, ArrayList<User>> mapping) throws Exception;
 }
