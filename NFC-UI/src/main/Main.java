@@ -2,8 +2,6 @@ package main;
 
 import java.util.function.Function;
 
-import security.User;
-
 public class Main {
 
 	public static void main(String[] args) throws Exception {
@@ -38,12 +36,12 @@ public class Main {
 
 	}
 
-	public static boolean Test(User user1, User user2, Function<User, String> test1, Function<User, String> test2) {
+	/*public static boolean Test(User user1, User user2, Function<User, String> test1, Function<User, String> test2) {
 
 		String value1 = test1.apply(user1);
 		String value2 = test2.apply(user2);
 
 		return value1 == value2;
 
-	}
+	}*/
 }

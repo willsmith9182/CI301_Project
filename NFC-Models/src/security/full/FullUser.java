@@ -1,11 +1,11 @@
-package security.basic;
+package security.full;
 
 import java.util.ArrayList;
 
 import security.Key;
 import security.Role;
 
-public class User {
+public class FullUser {
 
 	private final String _username;
 	private final String _password;
@@ -13,7 +13,7 @@ public class User {
 	private final Key _key;
 	private final ArrayList<Role> _roles;
 
-	public User(int userId, String username, String password, Key key, ArrayList<Role> roles) {
+	public FullUser(int userId, String username, String password, Key key, ArrayList<Role> roles) {
 		_userId = userId;
 		_password = password;
 		_username = username;

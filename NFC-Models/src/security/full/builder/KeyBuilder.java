@@ -1,4 +1,4 @@
-package security.mappings.builder;
+package security.full.builder;
 
 import java.util.UUID;
 

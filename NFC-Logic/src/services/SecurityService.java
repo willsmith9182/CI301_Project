@@ -1,10 +1,12 @@
 package services;
 
+import java.util.UUID;
+
 import data.repository.INFCRepository;
-import security.User;
+import security.basic.BasicUser;
 import security.crypto.IPasswordHash;
 
-public class SecurityService {
+public class SecurityService implements ISecurityService {
 	private final INFCRepository _repo;
 	private final IPasswordHash _hash;
 
@@ -13,9 +15,10 @@ public class SecurityService {
 		_hash = hash;
 	}
 
-	public Boolean UserIsAuthenticated(String username, String password) throws Exception {
+	@Override
+	public boolean UserIsAuthenticated(String username, String password) throws Exception {
 		try {
-			User user = _repo.GetMatchingUser(username, null);
+			BasicUser user = _repo.GetMatchingUser(username, null);
 
 			return _hash.Challenge(user.get_password(), "", password);
 		} catch (Exception e) {
@@ -25,6 +28,16 @@ public class SecurityService {
 				throw e;
 		}
 
+	}
+
+	@Override
+	public boolean UserDoorAccessChallenge(UUID doorToken, UUID keyToken) {
+
+		try {
+			return _repo.KeyTokenHasAccessToDoorToken(keyToken, doorToken);
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

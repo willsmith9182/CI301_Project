@@ -1,29 +1,24 @@
-package security.mappings;
+package security.basic.mappings;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import mapping.IMapping;
 import mapping.MappingBase;
-import security.User;
-import security.mappings.builder.KeyBuilder;
-import security.mappings.builder.UserBuilder;
+import security.basic.BasicUser;
+import security.basic.builder.BasicUserBuilder;
 
-public class GetUserMapping extends MappingBase<User> implements IMapping<User> {
 
-	private static User mapSingleUser(ResultSet rs) {
+public class BasicUserMapping extends MappingBase<BasicUser> implements IMapping<BasicUser> {
+
+	private static BasicUser mapSingleUser(ResultSet rs) {
 
 		try {
-			return UserBuilder.New()
+			return BasicUserBuilder.New()
 					.WithUserId(rs.getInt("_userID"))
 					.WithUsername(rs.getString("_username"))
-					.WithPassword(rs.getString("_password"))
-					.WithKey(KeyBuilder.New()
-							.WithId(rs.getInt("_keyId"))
-							.WithToken(UUID.fromString(rs.getString("_keyToken")))
-							.Make())
+					.WithPassword(rs.getString("_password"))					
 					.Make();
 			
 		} catch (SQLException e) {
@@ -36,13 +31,13 @@ public class GetUserMapping extends MappingBase<User> implements IMapping<User> 
 	}
 
 	@Override
-	public User MapSingle(ResultSet rs) throws Exception {
+	public BasicUser MapSingle(ResultSet rs) throws Exception {
 		return this.baseMapSingle(rs, i -> mapSingleUser(i));
 
 	}
 
 	@Override
-	public ArrayList<User> MapCollection(ResultSet rs) throws Exception {
+	public ArrayList<BasicUser> MapCollection(ResultSet rs) throws Exception {
 		return this.baseMapCollection(rs, i -> mapSingleUser(i));
 	}
 }
