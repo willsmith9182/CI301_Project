@@ -5,11 +5,11 @@ import java.util.UUID;
 public class Key {
 	private final int _keyId;
 	private final UUID _keyTokenValue;
-	
-	public Key(int keyId, UUID keyToken){
-		_keyId=keyId;
+
+	public Key(int keyId, UUID keyToken) {
+		_keyId = keyId;
 		_keyTokenValue = keyToken;
-				
+
 	}
 
 	public UUID get_keyTokenValue() {
@@ -19,5 +19,5 @@ public class Key {
 	public int get_keyId() {
 		return _keyId;
 	}
-	
+
 }

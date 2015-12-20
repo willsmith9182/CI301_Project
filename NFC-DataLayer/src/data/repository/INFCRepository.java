@@ -8,5 +8,6 @@ import security.User;
 
 public interface INFCRepository {
 	ArrayList<User> GetAllUsers(Function<ResultSet, ArrayList<User>> mapping) throws Exception;
-	User GetMatchingUser(String username,Function<ResultSet, ArrayList<User>> mapping) throws Exception;
+
+	User GetMatchingUser(String username, Function<ResultSet, ArrayList<User>> mapping) throws Exception;
 }

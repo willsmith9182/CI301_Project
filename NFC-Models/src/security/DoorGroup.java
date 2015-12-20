@@ -6,8 +6,8 @@ public class DoorGroup {
 
 	private final int _doorGroupId;
 	private final ArrayList<Door> _doors;
-	
-	public DoorGroup(int doorGroupId, ArrayList<Door> doors){
+
+	public DoorGroup(int doorGroupId, ArrayList<Door> doors) {
 		_doorGroupId = doorGroupId;
 		_doors = doors;
 	}
